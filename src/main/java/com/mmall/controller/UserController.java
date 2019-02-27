@@ -152,9 +152,5 @@ public class UserController {
         return iUserService.getInformation(user.getId());
     }
     
-    @RequestMapping(value = "check.do", method = RequestMethod.GET)
-    @ResponseBody
-    public ServerResponse<String> check(){
-        return ServerResponse.createBySuccess("成功");
-    }
+
 }
