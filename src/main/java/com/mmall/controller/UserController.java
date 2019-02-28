@@ -1,6 +1,10 @@
 package com.mmall.controller;
 
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.demo.trade.config.Configs;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.mmall.common.Const;
 import com.mmall.common.ServerResponse;
 import com.mmall.dao.UserMapper;
@@ -8,6 +12,8 @@ import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
 import com.mmall.util.MD5Util;
 import com.sun.org.apache.regexp.internal.RE;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,8 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sun.java2d.Surface;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: mmall
@@ -36,6 +45,7 @@ public class UserController {
     @Autowired
     UserMapper userMapper;
     
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping(value = "login.do",method = RequestMethod.POST)
     @ResponseBody
@@ -75,8 +85,8 @@ public class UserController {
             return response;
         }
         user.setRole(Const.Role.ROLE_CUSTOMER);
-        String MD5Password = MD5Util.MD5EncodeUtf8(user.getPassword());
-        user.setPassword(MD5Password);
+        String md5Password = MD5Util.MD5EncodeUtf8(user.getPassword());
+        user.setPassword(md5Password);
         int resultCount = userMapper.insert(user);
         if(resultCount == 0){
             return ServerResponse.createBySuccess("插入用户失败");
@@ -152,5 +162,5 @@ public class UserController {
         return iUserService.getInformation(user.getId());
     }
     
-
+    
 }

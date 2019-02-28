@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -18,7 +19,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     
-    int checkUsername(String usernamne);
+    int checkUsername(String username);
     
     int checkEmail(String email);
     

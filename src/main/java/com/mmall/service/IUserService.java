@@ -16,6 +16,11 @@ import java.util.List;
 
 
 public interface IUserService {
+    /**登陆
+     * @param username
+     * @param password
+     * @return
+     */
     ServerResponse<User> login(String username, String password);
     
     ServerResponse<List<User>> getAllUser();

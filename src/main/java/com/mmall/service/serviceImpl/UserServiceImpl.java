@@ -13,17 +13,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
 
 
-/**
- * @program: mmall
- * @Date: 2019/2/21 14:38
- * @Author: Mr.Wang
- * @Description:
- */
+
 @Service("iUserService")
 public class UserServiceImpl implements IUserService {
     
